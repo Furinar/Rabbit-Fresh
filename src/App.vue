@@ -1,13 +1,12 @@
 <template>
   <div class="app">
-    <h1>Welcome to RabbitShop</h1>
+    <el-button type="danger" :icon="Delete" circle></el-button>
+    <el-button type="primary" round>Primary</el-button>
   </div>
 </template>
 
 <script setup lang="ts" name="App">
-import { ref, reactive } from 'vue'
-
-
+import { Delete } from '@element-plus/icons-vue'
 </script>
 
 <style scoped></style>
