@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // 基础封装
 const request = axios.create({
-  baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net/',
+  baseURL: 'https://pcapi-xiaotuxian-front-devtest.itheima.net',
   timeout: 5000
 })
 
