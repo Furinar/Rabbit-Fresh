@@ -17,4 +17,12 @@ export default defineConfigWithVueTs(
 
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
+
+  // 关闭对组件命名的强制校验（多词名/模板命名大小写等）
+  {
+    rules: {
+      'vue/multi-word-component-names': 'off',
+      'vue/component-name-in-template-casing': 'off',
+    },
+  },
 )
