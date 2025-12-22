@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <h1>登录页面</h1>
+  <div class="Home">
+    <h1>这是Home界面</h1>
   </div>
 </template>
 
