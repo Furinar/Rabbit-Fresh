@@ -1,4 +1,4 @@
-import request from "@/router/request";
+import request from "@/utils";
 
 export function getCategory() {
   return request({
