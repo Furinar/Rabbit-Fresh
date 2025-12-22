@@ -11,13 +11,21 @@ export default defineConfig({
   plugins: [
     vue(),
     vueDevTools(),
-     AutoImport({
+    AutoImport({
+      // Auto import Vue core APIs plus router/pinia helpers
+      imports: ['vue', 'vue-router', 'pinia'],
+      // Scan local composables and stores
+      dirs: ['src/composables', 'src/stores'],
+      dts: './auto-imports.d.ts',
       resolvers: [ElementPlusResolver()],
     }),
     Components({
-      resolvers: [ElementPlusResolver({
-        importStyle: 'sass'
-      })],
+      dts: './components.d.ts',
+      resolvers: [
+        ElementPlusResolver({
+          importStyle: 'sass'
+        }),
+      ],
     }),
   ],
   resolve: {
