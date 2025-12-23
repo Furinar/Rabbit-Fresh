@@ -1,5 +1,5 @@
 import axios from '@/utils/request';
-import type { bannerItem, newItem } from '@/types/home';
+import type { bannerItem, hotItem, newItem } from '@/types/home';
 import type { ApiResponse } from '@/types/api';
 
 function getBannerApi(): Promise<ApiResponse<bannerItem[]>> {
@@ -16,4 +16,11 @@ function getNewApi(): Promise<ApiResponse<newItem[]>> {
   })
 }
 
-export { getBannerApi, getNewApi };
+function getHotApi():Promise<ApiResponse<hotItem[]>> {
+  return axios({
+    url: '/home/hot',
+    method: 'GET',
+  })
+}
+
+export { getBannerApi, getNewApi, getHotApi };

@@ -14,7 +14,16 @@ interface newItem{
   discount: string|null;
   orderNum: string|null;
 }
+
+interface hotItem{
+  id: string;
+  picture: string;
+  title: string;
+  alt: string;
+}
+
 export type {
   bannerItem,
-  newItem
+  newItem,
+  hotItem,
 }
