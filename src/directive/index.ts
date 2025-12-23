@@ -5,7 +5,7 @@ const lazyPlugin: Plugin = {
   install(app: App) {
     app.directive('img-lazy', {
       mounted(el: HTMLImageElement, binding: DirectiveBinding<string>) {
-        useIntersectionObserver(
+        const { stop } = useIntersectionObserver(
           el,
           ([entry]) => {
             if (entry?.isIntersecting) {

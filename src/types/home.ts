@@ -1,3 +1,5 @@
+import type { GoodsItem } from "./layout";
+
 interface bannerItem{
   id: string;
   imgUrl: string;
@@ -22,8 +24,25 @@ interface hotItem{
   alt: string;
 }
 
+interface projectItem{
+  id: string;
+  name: string;
+  picture: string;
+  saleInfo: string;
+  children: subProjectItem[];
+  goods: GoodsItem[];
+}
+
+interface subProjectItem {
+  id: string;
+  name: string;
+  layer: number;
+  parent: string|null;
+}
+
 export type {
   bannerItem,
   newItem,
   hotItem,
+  projectItem,
 }
