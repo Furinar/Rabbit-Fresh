@@ -6,18 +6,8 @@
       </h1>
 
       <ul class="header-nav">
-        <li>
-          <RouterLink to="/">首页</RouterLink>
-        </li>
-
-        <li>
-          <RouterLink to="/">居家</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">美食</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">服饰</RouterLink>
+        <li v-for="item in categoryList" :key="item.id">
+          <RouterLink to="/">{{ item.name }}</RouterLink>
         </li>
       </ul>
 
@@ -32,6 +22,20 @@
 </template>
 
 <script setup lang="ts">
+import { getCategoryApi } from '@/api/layout';
+import { ref } from 'vue';
+import type { CategoryItem } from '@/types/layout';
+
+const categoryList = ref<CategoryItem[]>([]);
+
+const getCategory = async () => {
+  const res = await getCategoryApi();
+  categoryList.value = res.result;
+}
+
+onMounted(() => {
+  getCategory();
+});
 
 </script>
 
