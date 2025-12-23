@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { getBannerApi } from '@/api/banner';
-import type { bannerItem } from '@/types/banner';
+import { getBannerApi } from '@/api/home';
+import type { bannerItem } from '@/types/home';
 
 const bannerList = ref<bannerItem[]>([]);
 const getBanner = async () => {
-  const res=await getBannerApi();
+  const res = await getBannerApi();
   bannerList.value = res.result;
 }
 
@@ -19,9 +19,7 @@ onMounted(() => {
   <div class="home-banner">
     <el-carousel height="500px">
       <el-carousel-item v-for="item in bannerList" :key="item.id">
-        <img
-          :src="item.imgUrl"
-          alt="">
+        <img :src="item.imgUrl" alt="">
       </el-carousel-item>
     </el-carousel>
   </div>

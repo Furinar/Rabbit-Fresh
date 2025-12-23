@@ -1,15 +1,69 @@
-<template>
-  <div class="container">
-    新品推荐
-  </div>
-</template>
-
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { getNewApi } from '@/api/home';
+import type { newItem } from '@/types/home';
+import panel from '@/views/Home/components/panel.vue';
+const newList = ref<newItem[]>([]);
+const getNewList = async () => {
+  const res = await getNewApi();
+  newList.value = res.result;
+}
 
+onMounted(() => {
+  getNewList();
+})
 
 </script>
 
-<style scoped>
+<template>
+  <panel title="新鲜好物" subtitle="新鲜出炉 品质靠谱">
+    <ul class="goods-list">
+      <li v-for="item in newList" :key="item.id">
+        <RouterLink to="/">
+          <img :src="item.picture" alt="" />
+          <p class="name">{{ item.name }}</p>
+          <p class="price">&yen;{{ item.price }}</p>
+        </RouterLink>
+      </li>
+    </ul>
+  </panel>
+</template>
 
+
+<style scoped lang='scss'>
+.goods-list {
+  display: flex;
+  justify-content: space-between;
+  height: 406px;
+
+  li {
+    width: 306px;
+    height: 406px;
+
+    background: #f0f9f4;
+    transition: all .5s;
+
+    &:hover {
+      transform: translate3d(0, -3px, 0);
+      box-shadow: 0 3px 8px rgb(0 0 0 / 20%);
+    }
+
+    img {
+      width: 306px;
+      height: 306px;
+    }
+
+    p {
+      font-size: 22px;
+      padding-top: 12px;
+      text-align: center;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .price {
+      color: $priceColor;
+    }
+  }
+}
 </style>
