@@ -1,8 +1,6 @@
 <template>
-  <!-- <RouterView /> -->
-  <div class="test">
-    scss
-  </div>
+  <RouterView />
+
 </template>
 
 <script setup lang="ts">
@@ -10,7 +8,5 @@
 </script>
 
 <style scoped lang="scss">
-.test {
-  color: $priceColor  ;
-}
+
 </style>
