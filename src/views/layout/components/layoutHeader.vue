@@ -22,20 +22,9 @@
 </template>
 
 <script setup lang="ts">
-import { getCategoryApi } from '@/api/layout';
-import { ref } from 'vue';
-import type { CategoryItem } from '@/types/layout';
-
-const categoryList = ref<CategoryItem[]>([]);
-
-const getCategory = async () => {
-  const res = await getCategoryApi();
-  categoryList.value = res.result;
-}
-
-onMounted(() => {
-  getCategory();
-});
+  
+const layoutStore = useLayoutStore();
+const { categoryList } = storeToRefs(layoutStore);
 
 </script>
 
