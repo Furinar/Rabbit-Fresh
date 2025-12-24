@@ -2,6 +2,7 @@
 import { getCategoryApi } from '@/api/category';
 import type { category } from '@/types/category';
 import { ref } from 'vue';
+import Banner from '../Home/components/banner.vue';
 
 const category = ref<category>({
   id: '',
@@ -17,14 +18,13 @@ const getCategory = async () => {
   category.value = res.result;
 }
 
-onUpdated(() => {
-  getCategory();
-})
-
 onMounted(() => {
   getCategory();
-})
+});
 
+onUpdated(() => {
+  getCategory();
+});
 </script>
 
 <template>
@@ -34,9 +34,11 @@ onMounted(() => {
       <div class="bread-container">
         <el-breadcrumb separator=">">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>{{ category.name }}</el-breadcrumb-item>
+          <el-breadcrumb-item>{{ category.name }} </el-breadcrumb-item>
         </el-breadcrumb>
       </div>
+
+      <banner :distributionSite="'2'"></banner>
     </div>
   </div>
 </template>

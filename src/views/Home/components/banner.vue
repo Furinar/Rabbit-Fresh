@@ -2,9 +2,13 @@
 import { getBannerApi } from '@/api/home';
 import type { bannerItem } from '@/types/home';
 
+const props = defineProps<{
+  distributionSite: string
+}>();
+const { distributionSite } = props;
 const bannerList = ref<bannerItem[]>([]);
 const getBanner = async () => {
-  const res = await getBannerApi();
+  const res = await getBannerApi(props.distributionSite);
   bannerList.value = res.result;
 }
 
@@ -16,7 +20,7 @@ onMounted(() => {
 
 
 <template>
-  <div class="home-banner">
+  <div class="home-banner" :class="`distribution-site-${distributionSite}`">
     <el-carousel height="500px">
       <el-carousel-item v-for="item in bannerList" :key="item.id">
         <img :src="item.imgUrl" alt="">
@@ -31,10 +35,17 @@ onMounted(() => {
 .home-banner {
   width: 1240px;
   height: 500px;
-  position: absolute;
   left: 0;
   top: 0;
-  z-index: 98;
+
+  &.distribution-site-1 {
+    z-index: 98;
+    position: absolute;
+  }
+
+  &.distribution-site-2 {
+    margin: 0 auto;
+  }
 
   img {
     width: 100%;

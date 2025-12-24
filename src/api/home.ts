@@ -2,10 +2,13 @@ import axios from '@/utils/request';
 import type { bannerItem, hotItem, newItem, projectItem } from '@/types/home';
 import type { ApiResponse } from '@/types/api';
 
-function getBannerApi(): Promise<ApiResponse<bannerItem[]>> {
+function getBannerApi(distributionSite:string='1'): Promise<ApiResponse<bannerItem[]>> {
   return axios({
     url: '/home/banner',
     method: 'GET',
+    params: {
+      distributionSite
+    }
   })
 }
 
