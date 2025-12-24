@@ -1,17 +1,40 @@
 <script setup lang="ts">
-import { getCategoryFilterAPI } from '@/api/category';
-import type{ subCategory } from '@/types/category';
+import { getCategoryFilterAPI, getSubCategoryAPI } from '@/api/category';
+import type { categoryDTO, goodsList, subCategory } from '@/types/category';
+import GoodItem from '../Home/components/GoodItem.vue';
 
-const categoryFilter = ref<subCategory|null>(null);
+const categoryFilter = ref<subCategory | null>(null);
 const getCategoryFilter = async (id: string) => {
   const res = await getCategoryFilterAPI(id);
   categoryFilter.value = res.result;
 };
 
-const route=useRoute();
+const route = useRoute();
+
+
+const subCategory = ref<goodsList | null>(null);
+const requireData = ref<categoryDTO>({
+  categoryId: Number(route.params.id),
+  page: 1,
+  pageSize: 20,
+  sortField: 'publishTime',
+})
+
+const getSubCategory = async () => {
+  const res = await getSubCategoryAPI(requireData.value);
+  subCategory.value = res.result;
+};
+
 onMounted(() => {
+  getSubCategory();
   getCategoryFilter(route.params.id as string);
 });
+
+watch(
+  () => requireData.value.sortField
+  , () => {
+    getSubCategory();
+  });
 
 </script>
 
@@ -29,13 +52,13 @@ onMounted(() => {
 
 
     <div class="sub-container">
-      <el-tabs>
+      <el-tabs v-model="requireData.sortField">
         <el-tab-pane label="最新商品" name="publishTime"></el-tab-pane>
         <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
         <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
       </el-tabs>
       <div class="body">
-        <!-- 商品列表-->
+        <good-item v-for="item in subCategory?.items" :key="item.id" :good="item"></good-item>
       </div>
     </div>
 

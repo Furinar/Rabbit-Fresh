@@ -1,5 +1,5 @@
 import type { ApiResponse } from '@/types/api'
-import type { category, subCategory } from '@/types/category'
+import type { category, categoryDTO, goodsList, subCategory } from '@/types/category'
 import axios from '@/utils/request'
 
 
@@ -21,7 +21,16 @@ function getCategoryFilterAPI(id: string): Promise<ApiResponse<subCategory>> {
     }
   })
 }
+
+const getSubCategoryAPI = (data: categoryDTO): Promise<ApiResponse<goodsList>> => {
+  return axios({
+    url: '/category/goods/temporary',
+    method: 'POST',
+    data
+  })
+}
 export {
   getCategoryApi,
-  getCategoryFilterAPI
+  getCategoryFilterAPI,
+  getSubCategoryAPI
 }

@@ -40,7 +40,25 @@ interface saleProperties{
   id: string;
   name: string;
 }
+
+interface categoryDTO{
+  categoryId: number;
+  page: number;
+  pageSize: number;
+  sortField: 'publishTime' | 'orderNum' | 'evaluateNum';
+}
+
+interface goodsList{
+  counts: number;
+  items: GoodsItem[];
+  page: number;
+  pageSize: number;
+  pages: number;
+}
+
 export type {
   category,
   subCategory,
+  categoryDTO,
+  goodsList
 }
