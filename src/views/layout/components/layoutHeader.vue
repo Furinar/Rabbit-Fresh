@@ -6,8 +6,11 @@
       </h1>
 
       <ul class="header-nav">
+        <li class="home">
+          <RouterLink to="/">首页</RouterLink>
+        </li>
         <li v-for="item in categoryList" :key="item.id">
-          <RouterLink to="/">{{ item.name }}</RouterLink>
+          <RouterLink :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
         </li>
       </ul>
 
@@ -22,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-  
+
 const layoutStore = useLayoutStore();
 const { categoryList } = storeToRefs(layoutStore);
 
