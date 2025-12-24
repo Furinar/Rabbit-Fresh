@@ -3,7 +3,7 @@ import { getCategoryApi } from '@/api/category';
 import type { category } from '@/types/category';
 import { ref } from 'vue';
 import Banner from '../Home/components/banner.vue';
-
+import GoodItem from '@/views/Home/components/GoodItem.vue';
 const category = ref<category>({
   id: '',
   name: '',
@@ -39,6 +39,27 @@ onUpdated(() => {
       </div>
 
       <banner :distributionSite="'2'"></banner>
+
+      <div class="sub-list">
+        <h3>全部分类</h3>
+        <ul>
+          <li v-for="i in category.children" :key="i.id">
+            <RouterLink to="/">
+              <img :src="i.picture" />
+              <p>{{ i.name }}</p>
+            </RouterLink>
+          </li>
+        </ul>
+      </div>
+      <div class="ref-goods" v-for="item in category.children" :key="item.id">
+        <div class="head">
+          <h3>- {{ item.name }}-</h3>
+        </div>
+        <div class="body">
+          <GoodItem v-for="good in item.goods" :good="good" :key="good.id" />
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -57,12 +78,11 @@ onUpdated(() => {
   .sub-list {
     margin-top: 20px;
     background-color: #fff;
-
     ul {
       display: flex;
       padding: 0 32px;
       flex-wrap: wrap;
-
+      justify-content: space-between;
       li {
         width: 168px;
         height: 160px;

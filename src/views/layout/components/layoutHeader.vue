@@ -7,10 +7,10 @@
 
       <ul class="header-nav">
         <li class="home">
-          <RouterLink to="/">首页</RouterLink>
+          <RouterLink to="/" exact-active-class="active">首页</RouterLink>
         </li>
         <li v-for="item in categoryList" :key="item.id">
-          <RouterLink :to="`/category/${item.id}`" active-class="active">{{ item.name }}</RouterLink>
+          <RouterLink :to="`/category/${item.id}`" exact-active-class="active">{{ item.name }}</RouterLink>
         </li>
       </ul>
 
