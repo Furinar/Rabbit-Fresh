@@ -12,7 +12,14 @@ const getCategoryFilter = async (id: string) => {
 const route = useRoute();
 
 
-const subCategory = ref<goodsList | null>(null);
+const subCategory = ref<goodsList>({
+  counts: 0,
+  items: [],
+  page: 1,
+  pageSize: 20,
+  pages: 0,
+});
+
 const requireData = ref<categoryDTO>({
   categoryId: Number(route.params.id),
   page: 1,
@@ -35,7 +42,17 @@ watch(
   , () => {
     getSubCategory();
   });
+const disabled = ref(false);
+const loadMore = async () => {
+  requireData.value.page++;
+  const res = await getSubCategoryAPI(requireData.value);
 
+  subCategory.value.items = [...subCategory.value.items, ...res.result.items];
+
+  if (res.result.items.length === 0) {
+    disabled.value = true;
+  }
+}
 </script>
 
 <template>
@@ -57,7 +74,8 @@ watch(
         <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
         <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
       </el-tabs>
-      <div class="body">
+      <div class="body" v-infinite-scroll="loadMore" :infinite-scroll-disabled="disabled"
+        infinite-scroll-distance="200">
         <good-item v-for="item in subCategory?.items" :key="item.id" :good="item"></good-item>
       </div>
     </div>
