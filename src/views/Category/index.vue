@@ -1,22 +1,9 @@
 <script setup lang="ts">
-import { getCategoryApi } from '@/api/category';
-import type { category } from '@/types/category';
-import { ref } from 'vue';
 import Banner from '../Home/components/banner.vue';
 import GoodItem from '@/views/Home/components/GoodItem.vue';
-const category = ref<category>({
-  id: '',
-  name: '',
-  picture: null,
-  children: null
-});
+import useCategory from './composables/useCategory';
 
-const route = useRoute();
-
-const getCategory = async (id:string= route.params.id as string) => {
-  const res = await getCategoryApi(id);
-  category.value = res.result;
-}
+const { category, getCategory } = useCategory();
 
 onMounted(() => {
   getCategory();
