@@ -1,5 +1,5 @@
 <template>
-  <layoutFixed />
+  <!-- <layoutFixed /> -->
   <layoutNav />
   <layoutHeader />
   <RouterView />
@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import layoutFixed from './components/layoutFixed.vue';
+// import layoutFixed from './components/layoutFixed.vue';
 import layoutFooter from './components/layoutFooter.vue';
 import layoutNav from './components/layoutNav.vue';
 import layoutHeader from './components/layoutHeader.vue';

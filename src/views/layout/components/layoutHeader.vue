@@ -10,7 +10,7 @@
           <RouterLink to="/">首页</RouterLink>
         </li>
         <li v-for="item in categoryList" :key="item.id">
-          <RouterLink :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
+          <RouterLink :to="`/category/${item.id}`" active-class="active">{{ item.name }}</RouterLink>
         </li>
       </ul>
 
@@ -34,6 +34,9 @@ const { categoryList } = storeToRefs(layoutStore);
 <style scoped lang="scss">
 .header {
   background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 
   .container {
     display: flex;
