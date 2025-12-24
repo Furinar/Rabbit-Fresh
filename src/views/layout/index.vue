@@ -2,7 +2,8 @@
   <!-- <layoutFixed /> -->
   <layoutNav />
   <layoutHeader />
-  <RouterView />
+  <!-- <RouterView :key="$route.fullPath"/> -->
+  <RouterView/>
   <div style="height: 100px;"></div>
   <layoutFooter />
 </template>

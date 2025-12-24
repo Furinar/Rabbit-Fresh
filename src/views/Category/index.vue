@@ -13,17 +13,27 @@ const category = ref<category>({
 
 const route = useRoute();
 
-const getCategory = async () => {
-  const res = await getCategoryApi(route.params.id as string);
+const getCategory = async (id:string= route.params.id as string) => {
+  const res = await getCategoryApi(id);
   category.value = res.result;
 }
 
 onMounted(() => {
   getCategory();
 });
+//方式一 路由守卫
+// watch(()=>route.params.id,()=>{
+//   getCategory();
+// })
 
-onUpdated(() => {
-  getCategory();
+// 方式二
+// watchEffect(() => {
+//   getCategory();
+// });
+
+//方式三
+onBeforeRouteUpdate((to) => {
+  getCategory(to.params.id as string);
 });
 </script>
 
