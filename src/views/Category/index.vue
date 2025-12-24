@@ -1,4 +1,29 @@
 <script setup lang="ts">
+import { getCategoryApi } from '@/api/category';
+import type { category } from '@/types/category';
+import { ref } from 'vue';
+
+const category = ref<category>({
+  id: '',
+  name: '',
+  picture: null,
+  children: null
+});
+
+const route = useRoute();
+
+const getCategory = async () => {
+  const res = await getCategoryApi(route.params.id as string);
+  category.value = res.result;
+}
+
+onUpdated(() => {
+  getCategory();
+})
+
+onMounted(() => {
+  getCategory();
+})
 
 </script>
 
@@ -9,7 +34,7 @@
       <div class="bread-container">
         <el-breadcrumb separator=">">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>居家</el-breadcrumb-item>
+          <el-breadcrumb-item>{{ category.name }}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
     </div>
